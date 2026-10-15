@@ -25,8 +25,8 @@ function BrandPage() {
   const list = products.filter((p) => p.brand === b.catalogName);
   const tops = new Map<string, number>();
   for (const p of list) {
-    const c = getCategory(p.categories[0]);
-    if (c) { const t = lineage(c)[0]; tops.set(t.slug, (tops.get(t.slug) ?? 0) + 1); }
+    const c = getCategory(p.categories[0] ?? "");
+    if (c) { const t = lineage(c)[0]!; tops.set(t.slug, (tops.get(t.slug) ?? 0) + 1); }
   }
   return (
     <>

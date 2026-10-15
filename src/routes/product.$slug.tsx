@@ -16,7 +16,7 @@ export const Route = createFileRoute("/product/$slug")({
   head: ({ loaderData }) => {
     const p = loaderData ? getProduct(loaderData.slug) : undefined;
     if (!p) return { meta: [{ title: "Product unavailable | DICS" }, { name: "robots", content: "noindex" }] };
-    const cat = getCategory(p.categories[0]);
+    const cat = getCategory(p.categories[0] ?? "");
     const title = `${p.brand ? p.brand + " " : ""}${p.name}${cat ? " — " + categoryLabel(cat) : ""}`;
     const desc = p.summary || `${p.brand ?? ""} ${p.name} ${cat ? categoryLabel(cat).toLowerCase() : ""} available from DICS, Bangalore. Request a quote for pricing, availability and technical details.`.replace(/\s+/g, " ").trim();
     const img = p.images[0];
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/product/$slug")({
 function ProductPage() {
   const { slug } = Route.useLoaderData();
   const p = getProduct(slug)!;
-  const cat = getCategory(p.categories[0]);
+  const cat = getCategory(p.categories[0] ?? "");
   const chain = cat ? lineage(cat) : [];
   const related = relatedProducts(p, 4);
   const brand = brands.find((b) => b.catalogName === p.brand);

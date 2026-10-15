@@ -21,7 +21,7 @@ function Events() {
           <p className="mt-3 text-muted-foreground">Follow DICS on social media for announcements, or contact us to arrange a product demonstration.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild><Link to="/contact-us">Request a demonstration</Link></Button>
-            <Button asChild variant="outline"><a href={company.socials[0].href} target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a></Button>
+            <Button asChild variant="outline"><a href={company.socials[0]!.href} target="_blank" rel="noopener noreferrer">Follow on LinkedIn</a></Button>
           </div>
         </div>
       </section>

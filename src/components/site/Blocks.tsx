@@ -6,7 +6,7 @@ import { categoryPath, getCategory, type Category, type Product } from "@/lib/ca
 
 export type Crumb = { label: string; to?: string; params?: Record<string, string> };
 
-export function PageHeader({ title, intro, crumbs, eyebrow }: { title: string; intro?: ReactNode; crumbs: Crumb[]; eyebrow?: string }) {
+export function PageHeader({ title, intro, crumbs, eyebrow }: { title: string; intro?: ReactNode | undefined; crumbs: Crumb[]; eyebrow?: string | undefined }) {
   return (
     <section className="relative overflow-hidden bg-navy-gradient text-navy-foreground">
       <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
@@ -40,7 +40,7 @@ export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
   );
 }
 
-export function ProductImage({ src, alt, className = "" }: { src?: string; alt: string; className?: string }) {
+export function ProductImage({ src, alt, className = "" }: { src?: string | undefined; alt: string; className?: string }) {
   if (!src) {
     return (
       <div className={`grid place-items-center bg-tech text-muted-foreground ${className}`}>
@@ -53,7 +53,7 @@ export function ProductImage({ src, alt, className = "" }: { src?: string; alt: 
 }
 
 export function ProductCard({ p }: { p: Product }) {
-  const cat = getCategory(p.categories[0]);
+  const cat = getCategory(p.categories[0] ?? "");
   return (
     <article className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow hover:shadow-lift">
       <Link to="/product/$slug" params={{ slug: p.slug }} className="block aspect-square bg-card p-5">
@@ -76,7 +76,7 @@ export function ProductCard({ p }: { p: Product }) {
   );
 }
 
-export function CategoryCard({ c, image }: { c: Category; image?: string }) {
+export function CategoryCard({ c, image }: { c: Category; image?: string | undefined }) {
   return (
     <Link
       to="/product-category/$"

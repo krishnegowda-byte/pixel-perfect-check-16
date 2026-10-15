@@ -77,7 +77,7 @@ export function EnquiryForm({ kind = "general", productSlug, productName, compac
         <h3 className="mt-4 text-xl font-semibold">Thank you — your enquiry has been received</h3>
         <p className="mt-2 text-sm text-muted-foreground">
           Our team will contact you. For urgent requirements call{" "}
-          <a className="font-medium text-primary hover:underline" href={company.phones[0].href}>{company.phones[0].label}</a>.
+          <a className="font-medium text-primary hover:underline" href={company.phones[0]!.href}>{company.phones[0]!.label}</a>.
         </p>
       </div>
     );

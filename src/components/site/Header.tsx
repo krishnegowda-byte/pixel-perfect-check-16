@@ -99,7 +99,7 @@ export function Header() {
               <span className="grid h-10 w-10 place-items-center rounded-full bg-tech text-primary"><Phone className="h-4 w-4" aria-hidden /></span>
               <div className="text-sm leading-tight">
                 <span className="block text-xs text-muted-foreground">Call our head office</span>
-                <a href={company.phones[0].href} className="font-semibold text-navy hover:text-primary">{company.phones[0].label}</a>
+                <a href={company.phones[0]!.href} className="font-semibold text-navy hover:text-primary">{company.phones[0]!.label}</a>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -246,7 +246,7 @@ function MobileNav() {
       <Link to="/contact-us" className={row}>Contact Us</Link>
       <div className="grid gap-3 p-5">
         <Button asChild size="lg"><Link to="/request-a-quote">Send an enquiry</Link></Button>
-        <a href={company.phones[0].href} className="flex items-center gap-2 text-sm text-navy"><Phone className="h-4 w-4 text-primary" /> {company.phones[0].label}</a>
+        <a href={company.phones[0]!.href} className="flex items-center gap-2 text-sm text-navy"><Phone className="h-4 w-4 text-primary" /> {company.phones[0]!.label}</a>
         <a href={`mailto:${company.email}`} className="flex items-center gap-2 text-sm text-navy"><Mail className="h-4 w-4 text-primary" /> {company.email}</a>
       </div>
       <span className="sr-only"><X /></span>

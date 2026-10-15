@@ -79,7 +79,7 @@ export function productsIn(cat: Category): Product[] {
 }
 
 export function topCategoryOf(p: Product): Category | undefined {
-  const c = getCategory(p.categories[0]);
+  const c = getCategory(p.categories[0] ?? "");
   return c ? lineage(c)[0] : undefined;
 }
 
