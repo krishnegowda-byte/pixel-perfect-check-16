@@ -137,6 +137,7 @@ export function Header() {
           <nav aria-label="Main" className="flex items-center">
             {plain("/", "Home")}
             {plain("/about-us", "About Us")}
+            {plain("/careers", "Careers")}
             {trigger("products", "Products")}
             {trigger("services", "Services")}
             {plain("/industries", "Industries")}
@@ -217,6 +218,7 @@ function MobileNav() {
     <nav aria-label="Mobile" className="pb-8">
       <Link to="/" className={row}>Home</Link>
       <Link to="/about-us" className={row}>About Us</Link>
+      <Link to="/careers" className={row}>Careers</Link>
       <button type="button" className={row} aria-expanded={sec === "p"} onClick={() => toggle("p")}>Products <ChevronDown className="h-4 w-4" /></button>
       {sec === "p" && (
         <ul className="bg-tech px-5 py-2">
