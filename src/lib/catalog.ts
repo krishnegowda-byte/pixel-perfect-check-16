@@ -91,7 +91,7 @@ export function relatedProducts(p: Product, n = 4): Product[] {
 
 export const brandNames = Array.from(new Set(products.map((p) => p.brand).filter(Boolean) as string[])).sort();
 
-export function searchProducts(opts: { q?: string; brand?: string; category?: string }) {
+export function searchProducts(opts: { q?: string | undefined; brand?: string | undefined; category?: string | undefined }) {
   const q = opts.q?.trim().toLowerCase();
   let list = products;
   if (opts.category) {

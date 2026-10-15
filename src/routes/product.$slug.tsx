@@ -100,7 +100,7 @@ function ProductPage() {
           )}
           <div className="mt-8 rounded-lg border border-border bg-tech p-6">
             <h2 className="text-lg font-semibold">Request a quote</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Prices and availability are confirmed per enquiry. Or call <a href={company.phones[0].href} className="inline-flex items-center gap-1 font-medium text-primary"><Phone className="h-3 w-3" />{company.phones[0].label}</a></p>
+            <p className="mt-1 text-sm text-muted-foreground">Prices and availability are confirmed per enquiry. Or call <a href={company.phones[0]!.href} className="inline-flex items-center gap-1 font-medium text-primary"><Phone className="h-3 w-3" />{company.phones[0]!.label}</a></p>
             <div className="mt-5"><EnquiryForm kind="product" productSlug={p.slug} productName={alt} compact /></div>
           </div>
         </div>

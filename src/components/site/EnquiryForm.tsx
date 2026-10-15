@@ -22,8 +22,8 @@ const interests = [
 
 type Props = {
   kind?: "general" | "quote" | "product";
-  productSlug?: string;
-  productName?: string;
+  productSlug?: string | undefined;
+  productName?: string | undefined;
   compact?: boolean;
 };
 
