@@ -44,6 +44,7 @@ export function Footer() {
           <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-navy-foreground">Company</h2>
           <ul className="mt-4 grid gap-2 text-sm">
             <li><Link to="/about-us" className="hover:text-navy-foreground">About Us</Link></li>
+            <li><Link to="/careers" className="hover:text-navy-foreground">Careers</Link></li>
             <li><Link to="/industries" className="hover:text-navy-foreground">Industries</Link></li>
             <li><Link to="/contact-us" className="hover:text-navy-foreground">Contact & Offices</Link></li>
             <li><Link to="/request-a-quote" className="hover:text-navy-foreground">Request a Quote</Link></li>
