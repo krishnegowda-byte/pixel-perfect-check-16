@@ -125,7 +125,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[88vw] max-w-sm overflow-y-auto p-0">
               <SheetTitle className="border-b border-border p-5 text-base">Menu</SheetTitle>
-              <MobileNav />
+              <MobileNav onNavigate={() => setMobile(false)} />
             </SheetContent>
           </Sheet>
         </div>
@@ -210,7 +210,7 @@ export function Header() {
   );
 }
 
-function MobileNav() {
+function MobileNav({ onNavigate }: { onNavigate: () => void }) {
   const [sec, setSec] = useState<string | null>(null);
   const toggle = (k: string) => setSec(sec === k ? null : k);
   const row = "flex w-full items-center justify-between border-b border-border px-5 py-4 text-left font-medium text-navy";
@@ -244,7 +244,7 @@ function MobileNav() {
           {brands.map((b) => <li key={b.slug}><Link to="/our-brands/$slug" params={{ slug: b.slug }} className="block py-2 text-sm">{b.name}</Link></li>)}
         </ul>
       )}
-      <Link to="/careers" className={row}>Careers</Link>
+      <Link to="/careers" onClick={onNavigate} className={row}>Careers</Link>
       <Link to="/contact-us" className={row}>Contact Us</Link>
       <div className="grid gap-3 p-5">
         <Button asChild size="lg"><Link to="/request-a-quote">Send an enquiry</Link></Button>
