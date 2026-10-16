@@ -21,7 +21,7 @@ export function CareerApplication({ position }: { position: string }) {
   async function prepare(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(event.currentTarget));
-    const parsed = careerApplicationSchema.safeParse({ ...values, consent, experience: values.experience === "" ? -1 : values.experience });
+    const parsed = careerApplicationSchema.safeParse({ ...values, consent, experience: values["experience"] === "" ? -1 : values["experience"] });
     if (!parsed.success) {
       const next: Record<string, string> = {};
       for (const issue of parsed.error.issues) next[String(issue.path[0])] = issue.message;
@@ -33,7 +33,7 @@ export function CareerApplication({ position }: { position: string }) {
     setServerError("");
     setStatus("sending");
     try {
-      const result = await send({ data: { ...parsed.data, website: String(values.website ?? ""), startedAt: startedAt.current } });
+      const result = await send({ data: { ...parsed.data, website: String(values["website"] ?? ""), startedAt: startedAt.current } });
       if (!result.ok) {
         setServerError(result.error);
         setStatus("idle");
@@ -68,17 +68,17 @@ export function CareerApplication({ position }: { position: string }) {
         {field("phone", "Phone number", "tel", 30)}
         <div>
           <Label htmlFor="experience">Years of experience <span aria-hidden className="text-primary">*</span></Label>
-          <Input id="experience" name="experience" type="number" min={0} max={60} step={0.5} required className="mt-2" aria-invalid={Boolean(errors.experience)} aria-describedby={errors.experience ? "experience-error" : undefined} />
+          <Input id="experience" name="experience" type="number" min={0} max={60} step={0.5} required className="mt-2" aria-invalid={Boolean(errors["experience"])} aria-describedby={errors["experience"] ? "experience-error" : undefined} />
           {error("experience")}
         </div>
         <div className="sm:col-span-2">
           <Label htmlFor="position">Position applied for <span aria-hidden className="text-primary">*</span></Label>
-          <Input key={position} id="position" name="position" defaultValue={position} maxLength={200} required className="mt-2" aria-invalid={Boolean(errors.position)} aria-describedby={errors.position ? "position-error" : undefined} />
+          <Input key={position} id="position" name="position" defaultValue={position} maxLength={200} required className="mt-2" aria-invalid={Boolean(errors["position"])} aria-describedby={errors["position"] ? "position-error" : undefined} />
           {error("position")}
         </div>
         <div className="sm:col-span-2">
           <Label htmlFor="skills">Relevant skills <span aria-hidden className="text-primary">*</span></Label>
-          <Textarea id="skills" name="skills" maxLength={1000} required placeholder="PLC programming, HMI development, commissioning…" className="mt-2" aria-invalid={Boolean(errors.skills)} aria-describedby={errors.skills ? "skills-error" : undefined} />
+          <Textarea id="skills" name="skills" maxLength={1000} required placeholder="PLC programming, HMI development, commissioning…" className="mt-2" aria-invalid={Boolean(errors["skills"])} aria-describedby={errors["skills"] ? "skills-error" : undefined} />
           {error("skills")}
         </div>
         <div className="sm:col-span-2">
@@ -88,7 +88,7 @@ export function CareerApplication({ position }: { position: string }) {
       </div>
       <p className="mt-6 flex items-start gap-2 text-sm text-muted-foreground"><Paperclip className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />Attach your résumé in your email before sending. No files are uploaded to this website.</p>
       <div className="mt-6 flex items-start gap-3">
-        <Checkbox id="consent" checked={consent} onCheckedChange={(value) => { setConsent(value === true); setEmailUrl(""); }} aria-invalid={Boolean(errors.consent)} aria-describedby={errors.consent ? "consent-error" : undefined} />
+        <Checkbox id="consent" checked={consent} onCheckedChange={(value) => { setConsent(value === true); setEmailUrl(""); }} aria-invalid={Boolean(errors["consent"])} aria-describedby={errors["consent"] ? "consent-error" : undefined} />
         <Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to DICS processing my details and résumé for recruitment. <Link to="/privacy-policy" className="text-primary underline">Privacy Policy</Link></Label>
       </div>
       {error("consent")}
