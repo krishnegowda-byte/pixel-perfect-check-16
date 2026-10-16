@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      career_applications: {
+        Row: {
+          consent: boolean
+          created_at: string
+          email: string
+          experience: number
+          full_name: string
+          id: string
+          message: string
+          phone: string
+          position: string
+          skills: string
+        }
+        Insert: {
+          consent: boolean
+          created_at?: string
+          email: string
+          experience: number
+          full_name: string
+          id?: string
+          message?: string
+          phone: string
+          position: string
+          skills: string
+        }
+        Update: {
+          consent?: boolean
+          created_at?: string
+          email?: string
+          experience?: number
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string
+          position?: string
+          skills?: string
+        }
+        Relationships: []
+      }
       enquiries: {
         Row: {
           company: string | null

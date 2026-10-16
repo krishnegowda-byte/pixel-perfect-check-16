@@ -1,5 +1,6 @@
 # Careers update
-- [ ] Expand Careers content and job presentation without inventing vacancy details.
-- [ ] Add desktop, mobile and footer navigation.
-- [ ] Provide validated application preparation with private résumé-by-email alternative.
-- [ ] Verify navigation, validation and mobile layout.
+- [x] Preserve Careers content and job presentation.
+- [x] Place Careers after Our Brands in desktop and mobile navigation.
+- [x] Store validated career applications privately and verify submission.
+- [ ] Send application notifications to both owner addresses (blocked by sender domain setup).
+- [x] Verify navigation, validation and mobile layout.
