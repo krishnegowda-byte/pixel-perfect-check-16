@@ -137,12 +137,12 @@ export function Header() {
           <nav aria-label="Main" className="flex items-center">
             {plain("/", "Home")}
             {plain("/about-us", "About Us")}
-            {plain("/careers", "Careers")}
             {trigger("products", "Products")}
             {trigger("services", "Services")}
             {plain("/industries", "Industries")}
             {plain("/events", "Events")}
             {trigger("brands", "Our Brands")}
+            {plain("/careers", "Careers")}
             {plain("/contact-us", "Contact Us")}
           </nav>
           <Button asChild variant="hero" size="sm" className="h-9 px-5">
@@ -218,7 +218,6 @@ function MobileNav() {
     <nav aria-label="Mobile" className="pb-8">
       <Link to="/" className={row}>Home</Link>
       <Link to="/about-us" className={row}>About Us</Link>
-      <Link to="/careers" className={row}>Careers</Link>
       <button type="button" className={row} aria-expanded={sec === "p"} onClick={() => toggle("p")}>Products <ChevronDown className="h-4 w-4" /></button>
       {sec === "p" && (
         <ul className="bg-tech px-5 py-2">
@@ -245,6 +244,7 @@ function MobileNav() {
           {brands.map((b) => <li key={b.slug}><Link to="/our-brands/$slug" params={{ slug: b.slug }} className="block py-2 text-sm">{b.name}</Link></li>)}
         </ul>
       )}
+      <Link to="/careers" className={row}>Careers</Link>
       <Link to="/contact-us" className={row}>Contact Us</Link>
       <div className="grid gap-3 p-5">
         <Button asChild size="lg"><Link to="/request-a-quote">Send an enquiry</Link></Button>
