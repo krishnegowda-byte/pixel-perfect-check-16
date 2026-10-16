@@ -13,4 +13,4 @@
 - Catalogue data lives in src/data/*.json, exported from the live WooCommerce Store API; regenerate rather than hand-edit, so it stays the source of truth.
 - Page URLs mirror the old WordPress site (/product/<slug>, /product-category/<path>, /about-us, /contact-us) so links and SEO carry over; old paths that changed get redirect routes.
 - Enquiries go through a validated server function into the enquiries table (insert-only for visitors) — never write to it from the browser.
-- Careers listings and application validation live in a browser-safe careers module; applications prepare an encoded email rather than uploading résumés, so candidate files stay out of public storage.
+- Careers listings and validation live in a browser-safe module; applications are stored through a validated server function with insert-only visitor access, while résumés use private email rather than public uploads.

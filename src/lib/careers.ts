@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const careerRecipients = ["bangalore@dicsglobal.com", "dicsblr@gmail.com"] as const;
+
 export type JobOpening = {
   title: string;
   department: string;
@@ -32,7 +34,7 @@ export const careerApplicationSchema = z.object({
 
 export function careerEmailUrl(email: string, input: unknown) {
   const data = careerApplicationSchema.parse(input);
-  const recipient = z.string().email().parse(email);
+  const recipient = email.split(",").map(address => z.string().email().parse(address.trim())).join(",");
   const body = `Full name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone}\nPosition: ${data.position}\nYears of experience: ${data.experience}\nRelevant skills: ${data.skills}\n\n${data.message}\n\nI consent to DICS processing these details and my résumé for recruitment.\n\nRésumé: attach before sending.`;
   return `mailto:${recipient}?subject=${encodeURIComponent(`Career Application — ${data.position}`)}&body=${encodeURIComponent(body)}`;
 }
