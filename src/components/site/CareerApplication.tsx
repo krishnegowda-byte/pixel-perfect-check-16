@@ -1,19 +1,24 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { Link } from "@tanstack/react-router";
-import { Mail, Paperclip } from "lucide-react";
+import { CheckCircle2, Loader2, Mail, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { careerApplicationSchema, careerEmailUrl } from "@/lib/careers";
-import { company } from "@/lib/site";
+import { careerApplicationSchema, careerEmailUrl, careerRecipients } from "@/lib/careers";
+import { submitCareerApplication } from "@/lib/careers.functions";
 
 export function CareerApplication({ position }: { position: string }) {
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [emailUrl, setEmailUrl] = useState("");
-  function prepare(event: FormEvent<HTMLFormElement>) {
+  const startedAt = useRef(Date.now());
+  const send = useServerFn(submitCareerApplication);
+  const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
+  const [serverError, setServerError] = useState("");
+  async function prepare(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(event.currentTarget));
     const parsed = careerApplicationSchema.safeParse({ ...values, consent, experience: values.experience === "" ? -1 : values.experience });
@@ -25,7 +30,21 @@ export function CareerApplication({ position }: { position: string }) {
       return;
     }
     setErrors({});
-    setEmailUrl(careerEmailUrl(company.email, parsed.data));
+    setServerError("");
+    setStatus("sending");
+    try {
+      const result = await send({ data: { ...parsed.data, website: String(values.website ?? ""), startedAt: startedAt.current } });
+      if (!result.ok) {
+        setServerError(result.error);
+        setStatus("idle");
+        return;
+      }
+      setEmailUrl(careerEmailUrl(careerRecipients.join(","), parsed.data));
+      setStatus("done");
+    } catch {
+      setServerError("We couldn't save your application. Please try again or email us directly.");
+      setStatus("idle");
+    }
   }
   const error = (name: string) => errors[name] ? <p id={`${name}-error`} className="mt-1 text-sm text-destructive">{errors[name]}</p> : null;
   const field = (name: string, label: string, type = "text", maxLength = 200) => (
@@ -35,6 +54,12 @@ export function CareerApplication({ position }: { position: string }) {
       {error(name)}
     </div>
   );
+  if (status === "done") return <div role="status" className="mt-8 border-l-2 border-success bg-tech p-6">
+    <CheckCircle2 className="h-7 w-7 text-success" aria-hidden />
+    <h3 className="mt-4 text-xl">Your application details have been received</h3>
+    <p className="mt-3 text-sm text-muted-foreground">Your details are saved. Automatic email notifications are not active yet. To send your résumé to our team, open the email below, attach your résumé and send it.</p>
+    <Button asChild className="mt-5"><a href={emailUrl}><Mail aria-hidden /> Email details and résumé</a></Button>
+  </div>;
   return (
     <form noValidate onSubmit={prepare} onChange={() => setEmailUrl("")} className="mt-8" aria-label="Careers application">
       <div className="grid gap-6 sm:grid-cols-2">
@@ -67,12 +92,10 @@ export function CareerApplication({ position }: { position: string }) {
         <Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to DICS processing my details and résumé for recruitment. <Link to="/privacy-policy" className="text-primary underline">Privacy Policy</Link></Label>
       </div>
       {error("consent")}
-      <Button type="submit" size="lg" className="mt-6"><Mail aria-hidden /> Prepare application email</Button>
-      {emailUrl && <div role="status" className="mt-5 border-l-2 border-primary bg-tech p-5">
-        <p className="text-sm">Your email is ready to open, but your application has not been sent. Attach your résumé and send it from your email app.</p>
-        <Button asChild className="mt-4"><a href={emailUrl}><Mail aria-hidden /> Open email application</a></Button>
-      </div>}
-      <p className="mt-4 text-sm text-muted-foreground">Prefer to email directly? Send your details and résumé to <a href={`mailto:${company.email}?subject=Career%20Application`} className="break-all font-medium text-primary underline">{company.email}</a>, our head-office contact.</p>
+      <div hidden aria-hidden><input name="website" tabIndex={-1} autoComplete="off" /></div>
+      {serverError && <p role="alert" className="mt-5 text-sm text-destructive">{serverError}</p>}
+      <Button type="submit" size="lg" disabled={status === "sending"} className="mt-6">{status === "sending" ? <Loader2 className="animate-spin" aria-hidden /> : <Mail aria-hidden />} {status === "sending" ? "Submitting…" : "Submit application"}</Button>
+      <p className="mt-4 text-sm text-muted-foreground">Prefer to email directly? Send your details and résumé to <a href={`mailto:${careerRecipients.join(",")}?subject=Career%20Application`} className="break-all font-medium text-primary underline">{careerRecipients.join(" and ")}</a>.</p>
     </form>
   );
 }

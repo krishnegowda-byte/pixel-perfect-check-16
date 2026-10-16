@@ -15,4 +15,8 @@ describe("Careers application email", () => {
       expect(careerApplicationSchema.safeParse({ ...application, ...change }).success).toBe(false);
     }
   });
+  it("addresses both recruitment inboxes safely", () => {
+    expect(careerEmailUrl("bangalore@dicsglobal.com,dicsblr@gmail.com", application)).toContain("mailto:bangalore@dicsglobal.com,dicsblr@gmail.com?");
+    expect(() => careerEmailUrl("bangalore@dicsglobal.com,invalid", application)).toThrow();
+  });
 });
