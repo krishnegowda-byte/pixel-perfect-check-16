@@ -172,4 +172,64 @@
 }
 @utility animate-rise {
   animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Slow zoom used on the home hero photograph */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+@utility animate-kenburns {
+  animation: kenburns 26s ease-in-out infinite alternate;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Gentle vertical drift for floating badges */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@utility animate-float {
+  animation: float 5s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Infinite horizontal loop; the track must contain the content twice */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@utility animate-marquee {
+  animation: marquee 32s linear infinite;
+  &:hover {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Scroll-into-view reveal, driven by the Reveal component */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+@utility reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
