@@ -1,4 +1,4 @@
-
+```tsx
 const WHATSAPP_NUMBER = "918310445374";
 
 const WHATSAPP_MESSAGE =
@@ -30,7 +30,9 @@ export function WhatsAppButton() {
       >
         <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 4a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z" />
       </svg>
+
       <span className="text-sm font-semibold">Chat with us</span>
     </a>
   );
 }
+```
