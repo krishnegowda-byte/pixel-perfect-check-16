@@ -1,4 +1,4 @@
-```tsx
+tsx
 const WHATSAPP_NUMBER = "918310445374";
 
 const WHATSAPP_MESSAGE =
@@ -35,4 +35,3 @@ export function WhatsAppButton() {
     </a>
   );
 }
-```
