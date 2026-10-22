@@ -1,10 +1,13 @@
 
 const WHATSAPP_NUMBER = "918310445374";
+
 const WHATSAPP_MESSAGE =
   "Hi DICS Global, I would like to know more about your industrial automation products and services.";
 
 export function WhatsAppButton() {
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    WHATSAPP_MESSAGE
+  )}`;
 
   return (
     <a
