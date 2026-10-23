@@ -13,6 +13,10 @@ const productGroups = [
   { title: "Sensing & Signalling", slugs: ["sensors-switches", "instrumentation", "patlite", "switches"] },
 ];
 
+const menuSubtext: Record<string, string> = {
+  "ac-drives": "Fuji Electric Inverters · OMRON Servo Drives · VFD",
+};
+
 type MenuKey = "products" | "services" | "brands" | null;
 
 function CatLink({ slug, onNavigate }: { slug: string; onNavigate: () => void }) {
@@ -32,7 +36,7 @@ function CatLink({ slug, onNavigate }: { slug: string; onNavigate: () => void })
         )}
         <span>
           <span className="block text-sm font-semibold text-navy group-hover:text-primary">{c.name}</span>
-          <span className="block text-xs text-muted-foreground">{subs.map((s) => s.name).join(" · ") || `${c.count} products`}</span>
+          <span className="block text-xs text-muted-foreground">{menuSubtext[c.slug] || subs.map((s) => s.name).join(" · ") || `${c.count} products`}</span>
         </span>
       </Link>
     </li>
@@ -192,9 +196,8 @@ export function Header() {
                   <ul className="grid grid-cols-4 gap-3">
                     {brands.map((b) => (
                       <li key={b.slug}>
-                        <Link to="/our-brands/$slug" params={{ slug: b.slug }} onClick={close} className="group flex h-full flex-col rounded-md border border-border p-4 hover:border-primary hover:shadow-card">
-                          <span className="font-display text-lg font-bold tracking-tight text-navy group-hover:text-primary">{b.name}</span>
-                          <span className="mt-1 text-xs text-muted-foreground">{b.origin}</span>
+                        <Link to="/our-brands/$slug" params={{ slug: b.slug }} onClick={close} aria-label={b.name} className="group flex h-20 items-center justify-center rounded-md border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-card">
+                          <img src={b.logo} alt={b.name} loading="lazy" className="max-h-10 w-auto max-w-[70%] object-contain transition-transform group-hover:scale-105" />
                         </Link>
                       </li>
                     ))}

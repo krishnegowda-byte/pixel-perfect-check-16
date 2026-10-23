@@ -1,6 +1,7 @@
 import rawCategories from "@/data/categories.json";
 import rawProducts from "@/data/products.json";
 import rawAcDrivesProducts from "@/data/ac-drives-products.json";
+import rawTowerLampProducts from "@/data/tower-lamp-products.json";
 
 /**
  * Catalogue data exported from the existing WooCommerce store on dicsglobal.com
@@ -29,7 +30,7 @@ export type Product = {
 };
 
 export const categories = rawCategories as Category[];
-export const products = [...(rawProducts as Product[]), ...(rawAcDrivesProducts as Product[])];
+export const products = [...(rawTowerLampProducts as Product[]), ...(rawProducts as Product[]), ...(rawAcDrivesProducts as Product[])];
 
 const byId = new Map(categories.map((c) => [c.id, c]));
 const bySlug = new Map(categories.map((c) => [c.slug, c]));
