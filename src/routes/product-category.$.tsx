@@ -43,6 +43,56 @@ function CategoryPage() {
         intro={cat.description || undefined}
         crumbs={[{ label: "Products", to: "/products" }, ...chain.map((c) => ({ label: c.name, to: "/product-category/$", params: { _splat: categoryPath(c) } }))]}
       />
+      {cat.slug === "fuji-drives-inverters" && (
+        <section className="container-site py-10 md:py-16">
+          <div className="grid items-center gap-10 rounded-2xl border border-border bg-muted/30 p-6 md:grid-cols-2 md:p-10">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+                Fuji Electric · Drives & Inverters
+              </p>
+
+              <h2 className="mt-3 text-3xl font-bold leading-tight md:text-4xl">
+                Precision Motor Control for Industrial Applications
+              </h2>
+
+              <p className="mt-5 leading-7 text-muted-foreground">
+                Explore Fuji Electric FRENIC drive solutions for industrial
+                motor control applications. DICS Global helps businesses
+                identify suitable drives and inverters based on their
+                machinery, operating requirements and application needs.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link to="/request-a-quote">
+                    Request a Quote
+                  </Link>
+                </Button>
+
+                <Button asChild variant="outline">
+                  <a href="#fuji-products">
+                    Explore Products
+                  </a>
+                </Button>
+              </div>
+
+              <p className="mt-5 text-sm text-muted-foreground">
+                Industrial automation products and engineering services
+                from DICS Global since 1996.
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-xl bg-background">
+              <img
+                src={cat.image}
+                alt="Fuji Electric drives and inverters"
+                className="h-64 w-full object-contain p-5 md:h-80"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </section>
+      )}
       {subs.length > 0 && (
         <section className="container-site py-12">
           <h2 className="text-2xl font-bold">Subcategories</h2>
@@ -51,7 +101,10 @@ function CategoryPage() {
           </div>
         </section>
       )}
-      <section className="container-site pb-16 pt-4">
+      <section
+  id={cat.slug === "fuji-drives-inverters" ? "fuji-products" : undefined}
+  className="container-site pb-16 pt-4"
+>
         <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
           <h2 className="text-2xl font-bold">Products in {categoryLabel(cat)}</h2>
           <Link to="/products" search={{ category: chain[0]?.slug }} className="text-sm font-semibold text-primary hover:underline">Search within this range</Link>
