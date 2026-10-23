@@ -164,8 +164,8 @@ function Home() {
                 aria-hidden={i >= brands.length}
                 tabIndex={i >= brands.length ? -1 : undefined}
               >
-                <span className="font-display text-2xl font-extrabold tracking-tight text-navy/80 transition-colors group-hover:text-primary">{b.name}</span>
-                <span className="mt-1 text-[0.7rem] uppercase tracking-wider text-muted-foreground">{b.origin}</span>
+                <img src={b.logo} alt={`${b.name} logo`} loading="lazy" className="h-9 w-36 object-contain transition-transform duration-300 group-hover:scale-105" />
+                <span className="mt-2 text-[0.7rem] uppercase tracking-wider text-muted-foreground">{b.name} · {b.origin}</span>
               </Link>
             ))}
           </div>

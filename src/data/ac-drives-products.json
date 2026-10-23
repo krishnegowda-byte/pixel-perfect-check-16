@@ -1,0 +1,317 @@
+[
+ {
+  "id": 20001,
+  "name": "FVR New Micro",
+  "slug": "ac-drives-fuji-fvr-new-micro",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FVR New Micro (Low Voltage Drives): Compact & Simple Drives with ideal functions to serve various needs with small-capacity settings.",
+  "description": "Compact & Simple Drives with ideal functions to serve various needs with small-capacity settings.\n\nFVR- New Micro:-Compact & Simple Drives and has Ideal function to serve various needs with small-capacity settings.The optimum frequency setting method can be selected to match your machine or equipment. This Drive is equipped to run simple applications for OEM's and have software features of High End Drives.\n\nFeatures & Benefits\n• Capacity range from 0.4 to 3.7 kW\n• 3-phase 400 V (0.4 to 3.7 kW) and Single-phase 200 V (0.4 to 2.2 kW)\n• Adoption of control system to minimize motor loss\n• Equipped with RS-485 as standard\n• PID control function\n• Analog input / analog output / multi-stage frequency / jog operation / remote/local\n• CE mark and UL/cUL approved standards",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/AS1S_left_web1.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20002,
+  "name": "FRENIC MINI",
+  "slug": "ac-drives-fuji-frenic-mini",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC MINI (Low Voltage Drives): Ideal for applications that require high starting torque, such as heavy inertia and conveyor machines.",
+  "description": "Ideal for applications that require high starting torque, such as heavy inertia and conveyor machines.\n\nThe Frenic New Mini C2 is ideal for applications that require high starting torque, such as heavy inertia and conveyor machines. The dynamic torque vector control system with a slip compensation controller shortens the time required for setting. With a compact design, simple operation and global compatibility, FRENIC-Mini C2 elevates the performance of a wide range of devices and equipment - including conveyors, fans, pumps, centrifugal separators, and food processing machines - to improve system integration and energy efficiency. The energy saving aspect alone helps to cut costs and lower maintenance costs as well.\n\nFeatures & Benefits\n• High performance and multipurpose.\n• Dynamic torque vector control system / Slip compensation controller shortens setting time / Fastest CPU processor in its class\n• Even easier to use and fully compatible with existing products:\n• External dimensions of C1 model equals C2 model\n• Easy operation and maintenance:\n• Usability / Easier maintenance / USB keypad (optional)\n• Energy optimizer:\n• New control system (energy use optimizer) / PID control function / Cooling fan ON/OFF control function / Synchronous motor control (coming soon)\n• Network capabilities standard: RS-485 communications port",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/frenic-mini-c2.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20003,
+  "name": "FRENIC ACE",
+  "slug": "ac-drives-fuji-frenic-ace",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC ACE (Low Voltage Drives): The standard inverter for the next generation - can be used in most types of applications, from fans and pumps to specialized machinery.",
+  "description": "The standard inverter for the next generation - can be used in most types of applications, from fans and pumps to specialized machinery.\n\nThe standard inverter for the next generation, the FRENIC-Ace can be used in most types of applications - from fans and pumps to specialized machinery. The customizable and programmable logic functions up to a maximum of 200 steps, whether it is simple logic functions or full-scale programming. It supports both digital and analog operations. It can be used for dedicated purposes such as wire drawing machines, spinning machines and hoists with the appropriate programming templates. The FRENIC-Ace offers advanced integration capabilities including applied power ratings, sensorless dynamic torque vector control, PM synchronous motor control, 2-channel on-board RS485 communication port, and customer customizable logic.\n\nFeatures & Benefits\n• Customizable logic, Superior flexibility\n• Quadruple rating\n• CAN Open communications built-in as standard\n• Capacity range up to 220 kW in HHD\n• Wide variety of functions as a standard feature\n• Functional safety: STO function as standard\n• 10 years lifetime design\n• Inbuilt LED keypad\n• Multi-function LCD keypad (optional)\n• Simple keypad with USB port (optional)",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/frenic-ace.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20004,
+  "name": "FRENIC MEGA",
+  "slug": "ac-drives-fuji-frenic-mega",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC MEGA (Low Voltage Drives): Expanded power ratings and flexible configurations that support 1/2 HP up to 1,000 HP AC drive/variable frequency drive (VFD).",
+  "description": "Expanded power ratings and flexible configurations that support 1/2 HP up to 1,000 HP AC drive/variable frequency drive (VFD).\n\nFuji Electric has raised the bar for inverter performance with the FRENIC-MEGA variable drive. Offering expanded power ratings and flexible configurations that support 0.4KW to 710KW AC drive/variable frequency drive (VFD) / v/ Hz vector drive applications – these inverters are designed for long lifecycles and improved maintenance functions. With the flexibility and functionality to support a wide range of applications on all types of mechanical equipment, FRENIC-MEGA takes core capability, responsiveness, environmental awareness, and easy maintenance to the next level.\n\nFeatures & Benefits\n• Safety enable input (compliant to EN/ISO13849-1 PL=d, cat. 3)\n• Sensorless vector control mode (100% torque at 0 Hz)\n• Advanced PID functions (dancer control)\n• Brake control function\n• Logic gates for logic combination of input and output functions and delay timer (10 steps)\n• Positioning function (when encoder option is used)\n• 3 slots for 3 different options at the same time (encoder, fieldbus, I/O expansion)\n• Removable control terminals (cage clamp type)\n• External EMC filter (footprint up to 22 kW) for higher EMC compliance (EN 61800-3, category C2)\n• Basic LED keypad with built-in USB port and copy function (1 complete function set, operation, maintenance and alarms information)\n• Advanced LCD/LED keypad with clear text description and copy function (3 complete function sets)",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/frenic-mega.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20005,
+  "name": "FRENIC MEGA G2",
+  "slug": "ac-drives-fuji-frenic-mega-g2",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC MEGA G2 (Low Voltage Drives): Build to support a wide variety of applications.",
+  "description": "Build to support a wide variety of applications.\n\nFRENIC MEGA G2, which is the successor of the former FRENIC MEGA G1 series and named a “Maximum Engineering for Global Advantage”, is a high-performance, multifunctional drives designed to suit various applications. Fuji Electric has developed this product by gathering the best of its technologies to answer critical challenges, optimize your application energy efficiency, and gives you comprehensive control.\n\nWith the flexibility and functionality to support a wide range of applications on all types of mechanical equipment, FRENIC-MEGA G2 takes core capability, responsiveness, environmental awareness, and easy maintenance to the next level.\n\nFeatures & Benefits\n",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/Megag2_edit.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20006,
+  "name": "FRENIC HVAC",
+  "slug": "ac-drives-fuji-frenic-hvac",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC HVAC (Low Voltage Drives): HVAC solutions to optimize comfort, safety and energy efficiency in your commercial and residential buildings.",
+  "description": "HVAC solutions to optimize comfort, safety and energy efficiency in your commercial and residential buildings.\n\n50% of energy consumption in office buildings is related to air conditioning. The FRENIC HVAC series is the dedicated inverter for HVAC that features functions and performances offer the optimal thermal environment for the people working in the building by keeping the energy consumption in various devices (compressor, condenser water pump, AHU and others) to the minimum. Fuji Electric contributes largely to global environment by realizing carbon dioxide reduction with energy saving by the inverter.\n\nFeatures & Benefits\n• Large Contribution to Reducing Global Warming (Environmental Protection) with Energy Saving\n• Significant Energy Saving Realized!!\n• Optimum Control for HVAC Facilities\n• Optimal Structure Design\n• Functions Suitable for HVAC Us",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/frenic-hvag-2.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20007,
+  "name": "FRENIC AQUA",
+  "slug": "ac-drives-fuji-frenic-aqua",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC AQUA (Low Voltage Drives): Helps energy-saving of pumps, eliminates ineffectual operations and regulates the amount of water required.",
+  "description": "Helps energy-saving of pumps, eliminates ineffectual operations and regulates the amount of water required.\n\nThe FRENIC-AQUA series is a dedicated inverter which helps to control pumps and motors. It helps energy-saving of pumps by eliminating ineffectual operations by regulating the amount of water required for various uses to significantly provide electricity conservation and cost reduction. FRENIC-AQUA has a wide capacity range - from 0.75 to 710 Kw. Analog inputs as well as 13 steps of customizable logic can be managed. It functions up to an overload capability of 110% and has torque vector control. 4 different pump control modes are available as standard and up to 9 pumps can be controlled with one inverter. Energy saving functions, such as 'Sleep Mode' can be activated when required.\n\nFeatures & Benefits\n• Wide capacity range from 0.75 kW to 710 kW\n• IP21 & IP55 with same dimension\n• DCR Reactor and EMC filter built-in up 90 kW. Built-in EMC filter for all capacities\n• Overload capability 110%\n• Torque Vector control\n• Modbus RTU, BACnet MS/TP, Metasys N2; integrated as standard\n• Large LCD display, 19 languages + user customizable language\n• Specific macros for common fan and compressor applications\n• Customizable Logic (mini PLC), 14 steps, possibility to manage digital and also analog signals\n• Real Time Clock (RTC)\n• 4 PID sets\n• Unit conversion function (kPa, bar, l/min, etc.)\n• Fire mode (forced operation)\n• Catch spinning motor\n• Password function\n• New energy saving functions (sleep mode)\n• Multipump control (up to 9 pumps with one inverter)\n• Anti jam function\n• Pipe fill mode\n• Extension cable for remote operation (CB-…S)\n• Battery (OPK-BP)",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/LeftAQUA.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20008,
+  "name": "FRENIC LIFT",
+  "slug": "ac-drives-fuji-frenic-lift",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC LIFT (Low Voltage Drives): Exclusive AC Drives for operation of elevators with vastly lower torque ripple and performance that fits most elevator systems.",
+  "description": "Exclusive AC Drives for operation of elevators with vastly lower torque ripple and performance that fits most elevator systems.\n\nThe FRENIC-Lift Series of exclusive AC Drives for operation of elevators are specially designed for elevator operations, such as vastly lower torque ripple and performance that fits most elevator systems. It can be side-mounted depending on space limitations like door frames. Removable power terminals enable easier and faster installation with pre-wiring. Cabinet designs can be smaller and cheaper in shaft installations with an IP 34 compliant heatsink. It meets functional safety functions according to EN81-20 certification. The outer coating makes the PCB stronger to withstand heat and dust of shaft environments. Different energy saving modes are available, allowing a high number of power ups per hour.\n\nFeatures & Benefits\n",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/Lift_resized.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20009,
+  "name": "FRENIC VG",
+  "slug": "ac-drives-fuji-frenic-vg",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC VG (Low Voltage Drives): Built-in converter (rectifier) and control circuit, an external DC reactor as standard for 75kW or higher capacities.",
+  "description": "Built-in converter (rectifier) and control circuit, an external DC reactor as standard for 75kW or higher capacities.\n\nWith FRENIC-VG, Fuji has concentrated its technologies to deliver the best-performing inverter on the market. In addition to basic performance, this model features the following dramatic improvements: support for previously difficult applications due to technical and capability limitations, user-friendly maintenance, and environmental friendliness and safety. It has a built-in converter (rectifier) and control circuit, an external DC reactor as standard for 75kW or higher capacities and allows for easier arrangements for small scale systems. The converter and invertor sections are separately set in this type. Large capacity systems with low maintenance are easily built. The converters can be used in both situations where no power regeneration is required or where it is required along with harmonic control.\n\nFeatures & Benefits\n• Powerful: from 0.75 kW to 630 kW in triple rating HD, LD and MD\n• Strong: even though in hard environment such as sulfurizing gas, salty environments, dust, humidity, etc.\n• Flexible: IM (open and closed loop) and PMSM (open* and closed loop) control\n• Torque accuracy: +/- 3%\n• Current loop bandwidth: 2000 Hz\n• Speed control accuracy: +/- 0,005%\n• Speed loop bandwidth: 600 Hz\n• Connected to the world: USB on board, typical field buses and Ethernet based field bus\n• Making safety easier: STO, SS1, SLS, SBC\n• All applications solved: Cranes, rubber, paper, winding, test benches, press, shipboard winch, flying shear, positioning, etc are included\n• Adaptable and versatile: 5 slots for adjusting to the requirements, real  time built in, FULL PLC on board optional, etc.\n• *Coming soon",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/B_VG_b.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20010,
+  "name": "FRENIC4000 Series – Small-to-medium capacity DC link inverters",
+  "slug": "ac-drives-fuji-frenic4000-series-small-to-medium-capacity-dc-link-inverters",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC4000 Series (Medium Voltage Drives): Helps better load management. No need for separate cooling fans in each unit and one cooling fan for the control panel is enough.",
+  "description": "Helps better load management. No need for separate cooling fans in each unit and one cooling fan for the control panel is enough.\n\nThe Frenic 4000 series helps better load management. With this extensive capacity series available from 10 kVA to 600 kVA, the capacity can easily be selected to match the load. In addition, by multiplexing the inverters, up to 3600 kVA (600 kVA x 6 inverter units) can be supported. There is no need for separate cooling fans in each unit and one cooling fan for the control panel is enough. High-efficiency plant operations can be achieved by exchanging power energy and regenerative energy with the DC distribution system over a common DC bus. While the control unit is in operation or stopped it is possible to check various data and status conditions, which makes it extremely easy to review the system operating state including safeguard and abnormal conditions with traceback functions available as an option.\n\nFeatures & Benefits\n• Extensive capacity series .\n• Stackable unit structure .\n• Easy maintenance and inspections.\n• Panel front maintenance access.\n• Fanless cooling of individual units.\n• Adoption of IGBT.\n• High-efficiency plant operations",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/FRENIC4000.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20011,
+  "name": "FRENIC4400 Series – Medium-to-large capacity DC link inverters",
+  "slug": "ac-drives-fuji-frenic4400-series-medium-to-large-capacity-dc-link-inverters",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC4400 Series (Medium Voltage Drives): Three-level PWM Inverter. Using three-level pulse-width modulation a single unit rated capacity of 1200 kVA is achieved.",
+  "description": "Three-level PWM Inverter. Using three-level pulse-width modulation a single unit rated capacity of 1200 kVA is achieved.\n\nThe Frenic 4400 Series is a Three-level PWM Inverter. Using three-level pulse-width modulation (PWM) control with output voltage at 800 V AC, a single unit rated capacity of 1200 kVA is achieved and a drastic reduction in the output current harmonics. An Insulated Gate Bipolar Transistor (IGBT) device configuration ensures faster control response, lower power loss and a simplified inverter control circuit. It allows precision control ranging from + or -0.01% to a torque control of + or -5%. Weak field control that constantly monitors magnetic flux makes it possible to ensure smooth high-speed operations. In addition, optional features such as observer control (impact drop compensation, shaft torsional vibration suppression), speed control autotuning, and plant control software (mechanical loss setting, torque forcing fixed position stop control) are available to be built in.\n\nFeatures & Benefits\n• Three-level PWM inverter\n• Adoption of IGBT\n• Outstanding control performance\n• High-efficiency plant operations\n• Easy maintenance and inspections",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/FRENIC4400.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20012,
+  "name": "FRENIC4600 Series – Medium-voltage direct output inverters",
+  "slug": "ac-drives-fuji-frenic4600-series-medium-voltage-direct-output-inverters",
+  "brand": "Fuji Electric",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "Fuji Electric FRENIC4600 Series (Medium Voltage Drives): Raises the efficiency and power factor of medium voltage motors by stabilizing motor operations and conserving energy.",
+  "description": "Raises the efficiency and power factor of medium voltage motors by stabilizing motor operations and conserving energy.\n\nFrenic 4600 is a series of environment friendly medium voltage IGBT inverters. It raises the efficiency and power factor of medium voltage motors by stabilizing motor operations and conserving energy. The multi-phase diode rectifier system reduces harmonics on the power source side. Fuji Electric's unique multi-level PWM control system reduces the switching surge and even standard motors can be operated. It provides a high-power factor (95% or more) on the power source. Output transformers can be eliminated and that improves total efficiency (approx 97%). High reliability is achieved by reducing the number of inverter cells and using a single-phase, 3-level inverter. Sensorless vector control functions ensure stable operations despite load fluctuations. The control device has a 32-bit MPU for quick response and high accuracy\n\nFeatures & Benefits\n• Transformerless output\n• Simple circuit configuration\n• Motor-friendly control\n• Power-supply-friendly control\n• Stable control\n• Commercial power bypass circuit function\n• Restart capability after momentary power failure\n• Improvement of operation and monitoring functions\n• LCD display touch panel\n• Abundant interface features and open connectivity",
+  "images": [
+   "https://www.india.fujielectric.com/hubfs/img_index_fm6e.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20013,
+  "name": "R88M-1A[] / R88D-1SAN[]-ECT",
+  "slug": "ac-drives-omron-r88m-1a-r88d-1san-ect",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON AC Servo System 1S-series with Safety Functionality — Safer environment and higher productivity",
+  "description": "AC Servo System 1S-series with Safety Functionality.\n\nSafer environment and higher productivity\n\nThe 1S servo drive with motion safety functionality provides protection for the machine operators from fatal injuries and shorter machine downtimes. Integrating motion safety functions into the servo drive minimize costs, components and wiring complexity. This model supports motion safety but it is even further evolved based on the concept of the standard 1S series. With the highest-level of motion control performance and safety functionality, productivity can be further improved.\n\nKey features\n• Power range from 200 W to 3 kW\n• 20 bit high resolution encoder\n• 350% momentary maximum torque (200 V, 750 W max.)\n• Battery-free absolute multi-turn encoder\n• Safety over EtherCAT (FSoE)\n• Power, encoder and brake in one pre-assembled cable with IP67 connector\n• Pluggable connectors for easy pre-wiring and system maintenance\n• Fast and secure screw-less push-in in all connectors",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-1A-1.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20014,
+  "name": "R88M-1[] / R88D-1SN[]-ECT",
+  "slug": "ac-drives-omron-r88m-1-r88d-1sn-ect",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON AC Servo System 1S-series — Optimized installation and setup Increased machine productivity",
+  "description": "AC Servo System 1S-series.\n\nOptimized installation and setup Increased machine productivity\n\nDesigned to meet the machine requirements, the 1S servo technology optimizes the full cycle, through the machine design, installation and commissioning tasks and finally to the maintenance once in production. In addition to the traditional motion solution, the 1S servo offers high resolution multi-turn encoder without battery backup, safety network built-in and improved loop control allowing accurate and higher machine productivity.\n\nKey features\n• Power range from 50 W to 15 kW\n• 23 bit high resolution encoder\n• Battery-free absolute multi-turn encoder\n• Improved loop control for low overshoot and quick settling time\n• No battery, no maintenance\n• No need for homing sequence improving machine uptime\n• Absolute multi-turn encoder design without mechanics: 16 bits, 65536 turns",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-1-1.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20015,
+  "name": "R88M-K, R88D-KN[]-ECT",
+  "slug": "ac-drives-omron-r88m-k-r88d-kn-ect",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON G5 Series AC Servomotor/Servo Drives with built-in EtherCAT Communications — The G5 series has a direct connection to the NJ controller via EtherCAT. Customers can design faster, more advanced machine automation control systems.",
+  "description": "G5 Series AC Servomotor/Servo Drives with built-in EtherCAT Communications.\n\nThe G5 series has a direct connection to the NJ controller via EtherCAT. Customers can design faster, more advanced machine automation control systems.\n\nKey features\n• High-accuracy positioning with fully-closed control.\n• Servo Drives for 400VAC globally widens applicable systems and environment, including large-scale equipment.\n• Safe design and Safe Torque Off (STO) function.\n• Vibration can be suppressed in acceleration/deceleration even in low-rigidity mechanical systems.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-KR88D-KN-ECT-2.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20016,
+  "name": "R88L-EC, R88D-KN[]-ECT-L",
+  "slug": "ac-drives-omron-r88l-ec-r88d-kn-ect-l",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON G5 Series Linear Motor/Servo Drives with built-in EtherCAT Communications Linear Motor Type — Linear Motor for Higher-speed and Higher-precision",
+  "description": "G5 Series Linear Motor/Servo Drives with built-in EtherCAT Communications Linear Motor Type.\n\nLinear Motor for Higher-speed and Higher-precision\n\nKey features\n• Inherited functions and performance of G5 series and EtherCAT communications achieve high-speed and high-precision control.\n• Lineup of compact, high-thrust iron-core motor type and cogging-free ironless motor type.\n• Same Iron-core motor type for 200V AC and 400V AC.\n• Quick setup by automatic setup function.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88L-EC-R88D-KN-ECT-L-5.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20017,
+  "name": "R88M-K, R88D-KN[]-ML2",
+  "slug": "ac-drives-omron-r88m-k-r88d-kn-ml2",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON G5-series AC Servomotors/Servo Drives with Built-in MECHATROLINK-II Communications — MECHATROLINK-II network communication modules are now available for the G5 series.",
+  "description": "G5-series AC Servomotors/Servo Drives with Built-in MECHATROLINK-II Communications.\n\nMECHATROLINK-II network communication modules are now available for the G5 series.\n\nKey features\n• Having a communications module built into the Servo Driver significantly saves space in the control panel.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-K-R88D-KN-ML2.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20018,
+  "name": "R88M-K, R88D-KT",
+  "slug": "ac-drives-omron-r88m-k-r88d-kt",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON G5-series AC Servomotors/Servo Drives with General-purpose Pulse Train or Analog Inputs — Pulse and analog input modules are now available for the G5 series.",
+  "description": "G5-series AC Servomotors/Servo Drives with General-purpose Pulse Train or Analog Inputs.\n\nPulse and analog input modules are now available for the G5 series.\n\nKey features\n• Industry Top-class Tracking Performance.\n• Best Positioning Accuracy*.\n• High-precision Positioning.\n• Conforms to the Latest International Standards.\n• Globalization. Lineup of 400 VAC Servomotors.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-K-R88D-KT-3.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20019,
+  "name": "R88M-G, R7D-BP",
+  "slug": "ac-drives-omron-r88m-g-r7d-bp",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON AC Servomotors and SMARTSTEP 2-series Servo Drives with Pulse String Inputs — Advanced Functionality in a Super Compact Design.",
+  "description": "AC Servomotors and SMARTSTEP 2-series Servo Drives with Pulse String Inputs.\n\nAdvanced Functionality in a Super Compact Design.\n\nSMARTSTEP2 is only 120 mm in height. By mounting it onto the same duct as the compact CP1/CP2 PLC, the duct pitch can be reduced, minimizing control panel space.\n\nAn autotuning function calculates the device load in realtime and automatically sets the optimum gain, simplifying the adjustment procedure.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-G-R7D-BP-3.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20020,
+  "name": "R88D-1SN[]-ECT-51",
+  "slug": "ac-drives-omron-r88d-1sn-ect-51",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON AC Servo System 1S-series with SS1/SLS Safety Sub-Functions — SS1 and SLS Realize More Efficient Production",
+  "description": "AC Servo System 1S-series with SS1/SLS Safety Sub-Functions.\n\nSS1 and SLS Realize More Efficient Production\n\nThe demand for safety shutdown and safety monitoring functions that comply with the international standard IEC 61800-5-2 (EN61800-5-2) has been increasing recently, mainly in the European and U.S. markets.\n\nTo meet such requirements, we have added the SS1/SLS-equipped model to the 1S-series AC Servo System.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-1-1.jpg"
+  ],
+  "sku": null
+ },
+ {
+  "id": 20021,
+  "name": "R88M-KE, R88D-KP",
+  "slug": "ac-drives-omron-r88m-ke-r88d-kp",
+  "brand": "OMRON",
+  "categories": [
+   "ac-drives"
+  ],
+  "summary": "OMRON G5-series Pulse Train Input Type AC Servomotors/Servo Drives — High-performance Servo Optimal for positioning Application.",
+  "description": "G5-series Pulse Train Input Type AC Servomotors/Servo Drives.\n\nHigh-performance Servo Optimal for positioning Application.\n\nSpeed response is representative of servo system characteristics. In the G5, the industry’s fastest response has been achieved at 2 kHz.\n\nThe maximum rotation speed of R88M-series Servomotors has increased to 6,000 r/min, resulting in high-speed positioning that can reduce tact time.",
+  "images": [
+   "https://dicsglobal.com/wp-content/uploads/2022/09/R88M-KE-R88D-KP-4.jpg"
+  ],
+  "sku": null
+ }
+]

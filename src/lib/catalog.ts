@@ -1,9 +1,11 @@
 import rawCategories from "@/data/categories.json";
 import rawProducts from "@/data/products.json";
+import rawAcDrivesProducts from "@/data/ac-drives-products.json";
 
 /**
  * Catalogue data exported from the existing WooCommerce store on dicsglobal.com
  * (Store API, 858 products, 133 categories). Re-export to refresh.
+ * AC Drives line-up (Fuji Electric drives + OMRON servo systems) lives in ac-drives-products.json.
  */
 export type Category = {
   id: number;
@@ -27,7 +29,7 @@ export type Product = {
 };
 
 export const categories = rawCategories as Category[];
-export const products = rawProducts as Product[];
+export const products = [...(rawProducts as Product[]), ...(rawAcDrivesProducts as Product[])];
 
 const byId = new Map(categories.map((c) => [c.id, c]));
 const bySlug = new Map(categories.map((c) => [c.slug, c]));
@@ -108,4 +110,3 @@ export function searchProducts(opts: { q?: string | undefined; brand?: string | 
   }
   return list;
 }
-
