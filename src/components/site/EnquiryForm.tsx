@@ -8,10 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/site";
 
-// Replace this placeholder with your Web3Forms access key.
-// Copy the key directly from your Web3Forms dashboard.
-// Do not paste the key into ChatGPT.
-const WEB3FORMS_ACCESS_KEY = "50f3ef02-e1bf-46d4-9243-2b122bfdad51";
+// Enquiry notifications are emailed to both office inboxes via FormSubmit.
+// The first submission triggers a one-time activation email to the main inbox.
+const ENQUIRY_EMAIL_TO = "dicsblr@gmail.com";
+const ENQUIRY_EMAIL_CC = "bangalore@dicsglobal.com";
 
 const interests = [
   "PLC / HMI / Factory Automation",
@@ -87,74 +87,47 @@ export function EnquiryForm({
     setNotificationWarning("");
     setStatus("sending");
 
-    try {
-      // First save the enquiry using the existing server function.
-      // This preserves your existing Supabase storage.
-      const res = await send({ data: payload });
+    // Save the enquiry (existing storage) and email it, independently,
+    // so a failure in one never blocks the other.
+    const [saveResult, emailResult] = await Promise.allSettled([
+      send({ data: payload }),
+      fetch(`https://formsubmit.co/ajax/${ENQUIRY_EMAIL_TO}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `New Website Enquiry - ${payload.fullName}${payload.productName ? ` - ${payload.productName}` : ""}`,
+          _cc: ENQUIRY_EMAIL_CC,
+          _template: "table",
+          _captcha: "false",
+          _replyto: payload.email,
+          Name: payload.fullName,
+          Company: payload.company || "-",
+          Email: payload.email,
+          Phone: payload.phone,
+          Requirement: payload.interest || "-",
+          Product: payload.productName || payload.productSlug || "-",
+          "Enquiry type": payload.kind,
+          Message: payload.message,
+          Page: payload.pageUrl,
+        }),
+      }).then(async (r) => {
+        const j = (await r.json().catch(() => ({}))) as { success?: string | boolean; message?: string };
+        if (!r.ok || String(j.success) !== "true") throw new Error(j.message || "Email notification failed");
+        return true;
+      }),
+    ]);
 
-      if (!res.ok) {
-        setServerError(res.error);
-        setStatus("error");
-        return;
-      }
+    const saved = saveResult.status === "fulfilled" && saveResult.value.ok;
+    const emailed = emailResult.status === "fulfilled";
+    if (!emailed) console.error("Enquiry email failed:", emailResult.status === "rejected" ? emailResult.reason : "");
 
-      // Then request an email notification through Web3Forms.
-      // If email notification fails, the saved enquiry is still retained.
-      try {
-        if (
-          !WEB3FORMS_ACCESS_KEY ||
-          WEB3FORMS_ACCESS_KEY === "PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE"
-        ) {
-          throw new Error("Web3Forms access key has not been configured.");
-        }
-
-        const emailResponse = await fetch(
-          "https://api.web3forms.com/submit",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              access_key: WEB3FORMS_ACCESS_KEY,
-              subject: "New Website Enquiry - DICS Global",
-              from_name: "DICS Global Website Enquiry",
-              name: payload.fullName,
-              company: payload.company,
-              email: payload.email,
-              phone: payload.phone,
-              interest: payload.interest,
-              product: payload.productName || payload.productSlug,
-              enquiry_type: payload.kind,
-              message: payload.message,
-              page: payload.pageUrl,
-            }),
-          },
-        );
-
-        const emailResult = (await emailResponse.json()) as {
-          success?: boolean;
-          message?: string;
-        };
-
-        if (!emailResponse.ok || emailResult.success !== true) {
-          throw new Error(
-            emailResult.message || "Email notification was unsuccessful.",
-          );
-        }
-      } catch (emailError) {
-        console.error("Web3Forms notification failed:", emailError);
-        setNotificationWarning(
-          "Your enquiry has been received, but the email notification could not be confirmed. Please contact our office if your requirement is urgent.",
-        );
-      }
-
-      // The enquiry was saved successfully, so show the confirmation.
+    if (saved || emailed) {
       setStatus("done");
-    } catch {
+    } else {
       setServerError(
-        "We couldn't send your enquiry right now. Please call or email us instead.",
+        saveResult.status === "fulfilled" && !saveResult.value.ok
+          ? saveResult.value.error
+          : "We couldn't send your enquiry right now. Please call or email us instead.",
       );
       setStatus("error");
     }
