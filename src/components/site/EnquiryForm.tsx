@@ -1,3 +1,4 @@
+
 import { useRef, useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Loader2 } from "lucide-react";
@@ -7,6 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/site";
+
+// Replace this placeholder with your Web3Forms access key.
+// Copy the key directly from your Web3Forms dashboard.
+// Do not paste the key into ChatGPT.
+const WEB3FORMS_ACCESS_KEY = "50f3ef02-e1bf-46d4-9243-2b122bfdad51";
 
 const interests = [
   "PLC / HMI / Factory Automation",
@@ -27,16 +33,27 @@ type Props = {
   compact?: boolean;
 };
 
-export function EnquiryForm({ kind = "general", productSlug, productName, compact }: Props) {
+export function EnquiryForm({
+  kind = "general",
+  productSlug,
+  productName,
+  compact,
+}: Props) {
   const send = useServerFn(submitEnquiry);
   const startedAt = useRef(Date.now());
+
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "done" | "error"
+  >("idle");
   const [serverError, setServerError] = useState("");
+  const [notificationWarning, setNotificationWarning] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     const fd = new FormData(e.currentTarget);
+
     const payload = {
       kind,
       fullName: String(fd.get("fullName") ?? ""),
@@ -48,44 +65,153 @@ export function EnquiryForm({ kind = "general", productSlug, productName, compac
       website: String(fd.get("website") ?? ""),
       productSlug: productSlug ?? "",
       productName: productName ?? "",
-      pageUrl: typeof window !== "undefined" ? window.location.pathname : "",
+      pageUrl:
+        typeof window !== "undefined" ? window.location.pathname : "",
       startedAt: startedAt.current,
     };
+
     const parsed = enquirySchema.safeParse(payload);
+
     if (!parsed.success) {
       const errs: Record<string, string> = {};
-      for (const i of parsed.error.issues) errs[String(i.path[0])] ??= i.message;
+
+      for (const issue of parsed.error.issues) {
+        errs[String(issue.path[0])] ??= issue.message;
+      }
+
       setErrors(errs);
       return;
     }
+
     setErrors({});
+    setServerError("");
+    setNotificationWarning("");
     setStatus("sending");
+
     try {
+      // First save the enquiry using the existing server function.
+      // This preserves your existing Supabase storage.
       const res = await send({ data: payload });
-      if (res.ok) setStatus("done");
-      else { setServerError(res.error); setStatus("error"); }
+
+      if (!res.ok) {
+        setServerError(res.error);
+        setStatus("error");
+        return;
+      }
+
+      // Then request an email notification through Web3Forms.
+      // If email notification fails, the saved enquiry is still retained.
+      try {
+        if (
+          !WEB3FORMS_ACCESS_KEY ||
+          WEB3FORMS_ACCESS_KEY === "PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE"
+        ) {
+          throw new Error("Web3Forms access key has not been configured.");
+        }
+
+        const emailResponse = await fetch(
+          "https://api.web3forms.com/submit",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_ACCESS_KEY,
+              subject: "New Website Enquiry - DICS Global",
+              from_name: "DICS Global Website Enquiry",
+              name: payload.fullName,
+              company: payload.company,
+              email: payload.email,
+              phone: payload.phone,
+              interest: payload.interest,
+              product: payload.productName || payload.productSlug,
+              enquiry_type: payload.kind,
+              message: payload.message,
+              page: payload.pageUrl,
+            }),
+          },
+        );
+
+        const emailResult = (await emailResponse.json()) as {
+          success?: boolean;
+          message?: string;
+        };
+
+        if (!emailResponse.ok || emailResult.success !== true) {
+          throw new Error(
+            emailResult.message || "Email notification was unsuccessful.",
+          );
+        }
+      } catch (emailError) {
+        console.error("Web3Forms notification failed:", emailError);
+        setNotificationWarning(
+          "Your enquiry has been received, but the email notification could not be confirmed. Please contact our office if your requirement is urgent.",
+        );
+      }
+
+      // The enquiry was saved successfully, so show the confirmation.
+      setStatus("done");
     } catch {
-      setServerError("We couldn't send your enquiry right now. Please call or email us instead.");
+      setServerError(
+        "We couldn't send your enquiry right now. Please call or email us instead.",
+      );
       setStatus("error");
     }
   }
 
   if (status === "done") {
     return (
-      <div role="status" className="rounded-lg border border-success/30 bg-card p-8 text-center shadow-card">
-        <CheckCircle2 className="mx-auto h-10 w-10 text-success" aria-hidden />
-        <h3 className="mt-4 text-xl font-semibold">Thank you — your enquiry has been received</h3>
+      <div
+        role="status"
+        className="rounded-lg border border-success/30 bg-card p-8 text-center shadow-card"
+      >
+        <CheckCircle2
+          className="mx-auto h-10 w-10 text-success"
+          aria-hidden
+        />
+
+        <h3 className="mt-4 text-xl font-semibold">
+          Thank you — your enquiry has been received
+        </h3>
+
         <p className="mt-2 text-sm text-muted-foreground">
           Our team will contact you. For urgent requirements call{" "}
-          <a className="font-medium text-primary hover:underline" href={company.phones[0]!.href}>{company.phones[0]!.label}</a>.
+          <a
+            className="font-medium text-primary hover:underline"
+            href={company.phones[0]!.href}
+          >
+            {company.phones[0]!.label}
+          </a>.
         </p>
+
+        {notificationWarning && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            {notificationWarning}
+          </p>
+        )}
       </div>
     );
   }
 
-  const field = (name: string) => (errors[name] ? { "aria-invalid": true, "aria-describedby": `${name}-err` } : {});
+  const field = (name: string) =>
+    errors[name]
+      ? {
+          "aria-invalid": true,
+          "aria-describedby": `${name}-err`,
+        }
+      : {};
+
   const err = (name: string) =>
-    errors[name] ? <p id={`${name}-err`} className="mt-1 text-xs text-destructive">{errors[name]}</p> : null;
+    errors[name] ? (
+      <p
+        id={`${name}-err`}
+        className="mt-1 text-xs text-destructive"
+      >
+        {errors[name]}
+      </p>
+    ) : null;
 
   return (
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
@@ -95,27 +221,57 @@ export function EnquiryForm({ kind = "general", productSlug, productName, compac
           <span className="font-semibold text-navy">{productName}</span>
         </div>
       )}
+
       <div className={compact ? "grid gap-4" : "grid gap-4 sm:grid-cols-2"}>
         <div>
           <Label htmlFor="fullName">Full name *</Label>
-          <Input id="fullName" name="fullName" autoComplete="name" className="mt-1.5" {...field("fullName")} />
+          <Input
+            id="fullName"
+            name="fullName"
+            autoComplete="name"
+            className="mt-1.5"
+            {...field("fullName")}
+          />
           {err("fullName")}
         </div>
+
         <div>
           <Label htmlFor="company">Company</Label>
-          <Input id="company" name="company" autoComplete="organization" className="mt-1.5" />
+          <Input
+            id="company"
+            name="company"
+            autoComplete="organization"
+            className="mt-1.5"
+          />
         </div>
+
         <div>
           <Label htmlFor="email">Business email *</Label>
-          <Input id="email" name="email" type="email" autoComplete="email" className="mt-1.5" {...field("email")} />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            className="mt-1.5"
+            {...field("email")}
+          />
           {err("email")}
         </div>
+
         <div>
           <Label htmlFor="phone">Phone *</Label>
-          <Input id="phone" name="phone" type="tel" autoComplete="tel" className="mt-1.5" {...field("phone")} />
+          <Input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            className="mt-1.5"
+            {...field("phone")}
+          />
           {err("phone")}
         </div>
       </div>
+
       {!productName && (
         <div>
           <Label htmlFor="interest">Product / service requirement</Label>
@@ -126,29 +282,63 @@ export function EnquiryForm({ kind = "general", productSlug, productName, compac
             className="mt-1.5 flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <option value="">Select your requirement</option>
-            {interests.map((i) => <option key={i}>{i}</option>)}
+            {interests.map((interest) => (
+              <option key={interest}>{interest}</option>
+            ))}
           </select>
         </div>
       )}
+
       <div>
-        <Label htmlFor="message">{kind === "quote" || productName ? "Quantity, application and details *" : "Project details *"}</Label>
-        <Textarea id="message" name="message" rows={compact ? 4 : 5} className="mt-1.5" {...field("message")} />
+        <Label htmlFor="message">
+          {kind === "quote" || productName
+            ? "Quantity, application and details *"
+            : "Project details *"}
+        </Label>
+        <Textarea
+          id="message"
+          name="message"
+          rows={compact ? 4 : 5}
+          className="mt-1.5"
+          {...field("message")}
+        />
         {err("message")}
       </div>
+
       {/* Honeypot — hidden from people, filled by bots */}
-      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+      >
         <label htmlFor="website">Website</label>
-        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
+        <input
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
+
       {status === "error" && (
-        <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">{serverError}</p>
+        <p
+          role="alert"
+          className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive"
+        >
+          {serverError}
+        </p>
       )}
+
       <div className="flex flex-wrap items-center gap-4">
         <Button type="submit" size="lg" disabled={status === "sending"}>
-          {status === "sending" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+          {status === "sending" && (
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+          )}
           {kind === "general" ? "Send enquiry" : "Request a quote"}
         </Button>
-        <p className="text-xs text-muted-foreground">We use your details only to respond to this enquiry.</p>
+
+        <p className="text-xs text-muted-foreground">
+          We use your details only to respond to this enquiry.
+        </p>
       </div>
     </form>
   );
