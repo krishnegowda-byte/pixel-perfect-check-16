@@ -18,10 +18,7 @@ function BrandsPage() {
           const count = products.filter((p) => p.brand === b.catalogName).length;
           return (
             <Link key={b.slug} to="/our-brands/$slug" params={{ slug: b.slug }} className="group flex flex-col rounded-lg border border-border bg-card p-7 transition-shadow hover:shadow-lift">
-              <div className="flex h-16 items-center">
-                <img src={b.logo} alt={`${b.name} logo`} loading="lazy" className="max-h-10 w-auto max-w-[9.5rem] object-contain object-left transition-transform duration-300 group-hover:scale-105" />
-              </div>
-              <span className="mt-4 font-display text-2xl font-extrabold tracking-tight text-navy group-hover:text-primary">{b.name}</span>
+              <span className="font-display text-3xl font-extrabold tracking-tight text-navy group-hover:text-primary">{b.name}</span>
               <span className="mt-1 text-xs uppercase tracking-wider text-muted-foreground">{b.origin}</span>
               <p className="mt-4 line-clamp-3 text-sm text-muted-foreground">{b.intro}</p>
               <span className="mt-auto pt-5 text-sm font-semibold text-primary">{count} products →</span>

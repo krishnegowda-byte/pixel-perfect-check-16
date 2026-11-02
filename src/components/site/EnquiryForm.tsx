@@ -8,11 +8,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { company } from "@/lib/site";
 
-// Enquiry notifications are emailed to both office inboxes via FormSubmit.
-// The first submission triggers a one-time activation email to the main inbox.
-const ENQUIRY_EMAIL_TO = "dicsblr@gmail.com";
-const ENQUIRY_EMAIL_CC = "bangalore@dicsglobal.com";
-
 const interests = [
   "PLC / HMI / Factory Automation",
   "VFD / AC Drives / Servo Drives",
@@ -32,27 +27,16 @@ type Props = {
   compact?: boolean;
 };
 
-export function EnquiryForm({
-  kind = "general",
-  productSlug,
-  productName,
-  compact,
-}: Props) {
+export function EnquiryForm({ kind = "general", productSlug, productName, compact }: Props) {
   const send = useServerFn(submitEnquiry);
   const startedAt = useRef(Date.now());
-
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "done" | "error"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [serverError, setServerError] = useState("");
-  const [notificationWarning, setNotificationWarning] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     const fd = new FormData(e.currentTarget);
-
     const payload = {
       kind,
       fullName: String(fd.get("fullName") ?? ""),
@@ -64,126 +48,44 @@ export function EnquiryForm({
       website: String(fd.get("website") ?? ""),
       productSlug: productSlug ?? "",
       productName: productName ?? "",
-      pageUrl:
-        typeof window !== "undefined" ? window.location.pathname : "",
+      pageUrl: typeof window !== "undefined" ? window.location.pathname : "",
       startedAt: startedAt.current,
     };
-
     const parsed = enquirySchema.safeParse(payload);
-
     if (!parsed.success) {
       const errs: Record<string, string> = {};
-
-      for (const issue of parsed.error.issues) {
-        errs[String(issue.path[0])] ??= issue.message;
-      }
-
+      for (const i of parsed.error.issues) errs[String(i.path[0])] ??= i.message;
       setErrors(errs);
       return;
     }
-
     setErrors({});
-    setServerError("");
-    setNotificationWarning("");
     setStatus("sending");
-
-    // Save the enquiry (existing storage) and email it, independently,
-    // so a failure in one never blocks the other.
-    const [saveResult, emailResult] = await Promise.allSettled([
-      send({ data: payload }),
-      fetch(`https://formsubmit.co/ajax/${ENQUIRY_EMAIL_TO}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `New Website Enquiry - ${payload.fullName}${payload.productName ? ` - ${payload.productName}` : ""}`,
-          _cc: ENQUIRY_EMAIL_CC,
-          _template: "table",
-          _captcha: "false",
-          _replyto: payload.email,
-          Name: payload.fullName,
-          Company: payload.company || "-",
-          Email: payload.email,
-          Phone: payload.phone,
-          Requirement: payload.interest || "-",
-          Product: payload.productName || payload.productSlug || "-",
-          "Enquiry type": payload.kind,
-          Message: payload.message,
-          Page: payload.pageUrl,
-        }),
-      }).then(async (r) => {
-        const j = (await r.json().catch(() => ({}))) as { success?: string | boolean; message?: string };
-        if (!r.ok || String(j.success) !== "true") throw new Error(j.message || "Email notification failed");
-        return true;
-      }),
-    ]);
-
-    const saved = saveResult.status === "fulfilled" && saveResult.value.ok;
-    const emailed = emailResult.status === "fulfilled";
-    if (!emailed) console.error("Enquiry email failed:", emailResult.status === "rejected" ? emailResult.reason : "");
-
-    if (saved || emailed) {
-      setStatus("done");
-    } else {
-      setServerError(
-        saveResult.status === "fulfilled" && !saveResult.value.ok
-          ? saveResult.value.error
-          : "We couldn't send your enquiry right now. Please call or email us instead.",
-      );
+    try {
+      const res = await send({ data: payload });
+      if (res.ok) setStatus("done");
+      else { setServerError(res.error); setStatus("error"); }
+    } catch {
+      setServerError("We couldn't send your enquiry right now. Please call or email us instead.");
       setStatus("error");
     }
   }
 
   if (status === "done") {
     return (
-      <div
-        role="status"
-        className="rounded-lg border border-success/30 bg-card p-8 text-center shadow-card"
-      >
-        <CheckCircle2
-          className="mx-auto h-10 w-10 text-success"
-          aria-hidden
-        />
-
-        <h3 className="mt-4 text-xl font-semibold">
-          Thank you — your enquiry has been received
-        </h3>
-
+      <div role="status" className="rounded-lg border border-success/30 bg-card p-8 text-center shadow-card">
+        <CheckCircle2 className="mx-auto h-10 w-10 text-success" aria-hidden />
+        <h3 className="mt-4 text-xl font-semibold">Thank you — your enquiry has been received</h3>
         <p className="mt-2 text-sm text-muted-foreground">
           Our team will contact you. For urgent requirements call{" "}
-          <a
-            className="font-medium text-primary hover:underline"
-            href={company.phones[0]!.href}
-          >
-            {company.phones[0]!.label}
-          </a>.
+          <a className="font-medium text-primary hover:underline" href={company.phones[0]!.href}>{company.phones[0]!.label}</a>.
         </p>
-
-        {notificationWarning && (
-          <p className="mt-4 text-sm text-muted-foreground">
-            {notificationWarning}
-          </p>
-        )}
       </div>
     );
   }
 
-  const field = (name: string) =>
-    errors[name]
-      ? {
-          "aria-invalid": true,
-          "aria-describedby": `${name}-err`,
-        }
-      : {};
-
+  const field = (name: string) => (errors[name] ? { "aria-invalid": true, "aria-describedby": `${name}-err` } : {});
   const err = (name: string) =>
-    errors[name] ? (
-      <p
-        id={`${name}-err`}
-        className="mt-1 text-xs text-destructive"
-      >
-        {errors[name]}
-      </p>
-    ) : null;
+    errors[name] ? <p id={`${name}-err`} className="mt-1 text-xs text-destructive">{errors[name]}</p> : null;
 
   return (
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
@@ -193,57 +95,27 @@ export function EnquiryForm({
           <span className="font-semibold text-navy">{productName}</span>
         </div>
       )}
-
       <div className={compact ? "grid gap-4" : "grid gap-4 sm:grid-cols-2"}>
         <div>
           <Label htmlFor="fullName">Full name *</Label>
-          <Input
-            id="fullName"
-            name="fullName"
-            autoComplete="name"
-            className="mt-1.5"
-            {...field("fullName")}
-          />
+          <Input id="fullName" name="fullName" autoComplete="name" className="mt-1.5" {...field("fullName")} />
           {err("fullName")}
         </div>
-
         <div>
           <Label htmlFor="company">Company</Label>
-          <Input
-            id="company"
-            name="company"
-            autoComplete="organization"
-            className="mt-1.5"
-          />
+          <Input id="company" name="company" autoComplete="organization" className="mt-1.5" />
         </div>
-
         <div>
           <Label htmlFor="email">Business email *</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className="mt-1.5"
-            {...field("email")}
-          />
+          <Input id="email" name="email" type="email" autoComplete="email" className="mt-1.5" {...field("email")} />
           {err("email")}
         </div>
-
         <div>
           <Label htmlFor="phone">Phone *</Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            className="mt-1.5"
-            {...field("phone")}
-          />
+          <Input id="phone" name="phone" type="tel" autoComplete="tel" className="mt-1.5" {...field("phone")} />
           {err("phone")}
         </div>
       </div>
-
       {!productName && (
         <div>
           <Label htmlFor="interest">Product / service requirement</Label>
@@ -254,63 +126,29 @@ export function EnquiryForm({
             className="mt-1.5 flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <option value="">Select your requirement</option>
-            {interests.map((interest) => (
-              <option key={interest}>{interest}</option>
-            ))}
+            {interests.map((i) => <option key={i}>{i}</option>)}
           </select>
         </div>
       )}
-
       <div>
-        <Label htmlFor="message">
-          {kind === "quote" || productName
-            ? "Quantity, application and details *"
-            : "Project details *"}
-        </Label>
-        <Textarea
-          id="message"
-          name="message"
-          rows={compact ? 4 : 5}
-          className="mt-1.5"
-          {...field("message")}
-        />
+        <Label htmlFor="message">{kind === "quote" || productName ? "Quantity, application and details *" : "Project details *"}</Label>
+        <Textarea id="message" name="message" rows={compact ? 4 : 5} className="mt-1.5" {...field("message")} />
         {err("message")}
       </div>
-
       {/* Honeypot — hidden from people, filled by bots */}
-      <div
-        aria-hidden
-        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
-      >
+      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-        />
+        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
-
       {status === "error" && (
-        <p
-          role="alert"
-          className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive"
-        >
-          {serverError}
-        </p>
+        <p role="alert" className="rounded-md border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">{serverError}</p>
       )}
-
       <div className="flex flex-wrap items-center gap-4">
         <Button type="submit" size="lg" disabled={status === "sending"}>
-          {status === "sending" && (
-            <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-          )}
+          {status === "sending" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
           {kind === "general" ? "Send enquiry" : "Request a quote"}
         </Button>
-
-        <p className="text-xs text-muted-foreground">
-          We use your details only to respond to this enquiry.
-        </p>
+        <p className="text-xs text-muted-foreground">We use your details only to respond to this enquiry.</p>
       </div>
     </form>
   );

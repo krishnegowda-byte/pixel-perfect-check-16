@@ -18,7 +18,7 @@ const milestones = [
 function About() {
   return (
     <>
-      <PageHeader title="About DICS" eyebrow="About us" crumbs={[{ label: "About Us" }]} intro="For three decades DICS has offered information-driven, high-end products and innovative automation solutions to Indian industry." />
+      <PageHeader title="About Digital Instruments & Control Systems" eyebrow="About us" crumbs={[{ label: "About Us" }]} intro="For three decades DICS has offered information-driven, high-end products and innovative automation solutions to Indian industry." />
       <section className="container-site grid items-start gap-12 py-16 lg:grid-cols-2">
         <div className="space-y-4 leading-relaxed text-muted-foreground">
           <SectionHeading eyebrow="Our story" title="Engineering-led since 1996" />
