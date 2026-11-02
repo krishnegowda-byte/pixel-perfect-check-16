@@ -18,7 +18,10 @@ type MenuKey = "products" | "services" | "brands" | null;
 function CatLink({ slug, onNavigate }: { slug: string; onNavigate: () => void }) {
   const c = getCategory(slug);
   if (!c) return null;
-  const subs = childrenOf(c).slice(0, 4);
+  const children = childrenOf(c);
+  const subs = (slug === "motion-controller"
+    ? children.filter((s) => ["fuji-electric-servo-system", "omron-servomotors-servo-drivers"].includes(s.slug))
+    : children).slice(0, 4);
   return (
     <li>
       <Link

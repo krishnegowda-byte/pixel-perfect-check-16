@@ -31,7 +31,8 @@ export const Route = createFileRoute("/product-category/$")({
 
 function CategoryPage() {
   const { slug } = Route.useLoaderData();
-  const cat = getCategory(slug)!;
+  const cat = getCategory(slug);
+  if (!cat) throw notFound();
   const chain = lineage(cat);
   const subs = childrenOf(cat);
   const list = productsIn(cat);
@@ -54,7 +55,7 @@ function CategoryPage() {
       <section className="container-site pb-16 pt-4">
         <div className="flex items-end justify-between gap-4 border-b border-border pb-4">
           <h2 className="text-2xl font-bold">Products in {categoryLabel(cat)}</h2>
-          <Link to="/products" search={{ category: chain[0]?.slug }} className="text-sm font-semibold text-primary hover:underline">Search within this range</Link>
+          <Link to="/products" search={{ category: cat.slug }} className="text-sm font-semibold text-primary hover:underline">Search within this range</Link>
         </div>
         {list.length === 0 ? (
           <p className="mt-8 text-muted-foreground">No products are listed here yet. <Link to="/request-a-quote" className="text-primary hover:underline">Send your requirement</Link> and our team will help.</p>
