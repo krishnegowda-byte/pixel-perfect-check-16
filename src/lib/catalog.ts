@@ -1,6 +1,7 @@
 import rawCategories from "@/data/categories.json";
 import rawProducts from "@/data/products.json";
 import { categoryPresentation, driveCategorySlugs, inverterBrandCategories, servoBrandCategories } from "./catalog-presentation";
+import { productImages } from "./catalog-product-images";
 
 /**
  * Catalogue data exported from the existing WooCommerce store on dicsglobal.com
@@ -35,7 +36,10 @@ export const categories: Category[] = (rawCategories as Category[]).map((categor
     : category.parent;
   return { ...category, parent, name: presentation.name ?? category.name, image: presentation.image ?? category.image };
 });
-export const products = rawProducts as Product[];
+export const products: Product[] = (rawProducts as Product[]).map((product) => {
+  const image = productImages[product.slug];
+  return image ? { ...product, images: [image, ...product.images.slice(1)] } : product;
+});
 
 const byId = new Map(categories.map((c) => [c.id, c]));
 const bySlug = new Map(categories.map((c) => [c.slug, c]));
