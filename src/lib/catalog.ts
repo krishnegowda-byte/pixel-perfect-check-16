@@ -1,5 +1,6 @@
 import rawCategories from "@/data/categories.json";
 import rawProducts from "@/data/products.json";
+import { categoryPresentation, driveCategorySlugs, inverterBrandCategories, servoBrandCategories } from "./catalog-presentation";
 
 /**
  * Catalogue data exported from the existing WooCommerce store on dicsglobal.com
@@ -26,7 +27,14 @@ export type Product = {
   sku: string | null;
 };
 
-export const categories = rawCategories as Category[];
+export const categories: Category[] = (rawCategories as Category[]).map((category) => {
+  const presentation = categoryPresentation[category.slug];
+  if (!presentation) return category;
+  const parent = presentation.parentSlug
+    ? rawCategories.find((c) => c.slug === presentation.parentSlug)?.id ?? category.parent
+    : category.parent;
+  return { ...category, parent, name: presentation.name ?? category.name, image: presentation.image ?? category.image };
+});
 export const products = rawProducts as Product[];
 
 const byId = new Map(categories.map((c) => [c.id, c]));
@@ -40,7 +48,13 @@ export const topCategories = categories
   .sort((a, b) => a.name.localeCompare(b.name));
 
 export function childrenOf(cat: Category) {
-  return categories.filter((c) => c.parent === cat.id).sort((a, b) => a.name.localeCompare(b.name));
+  const children = categories.filter((c) => c.parent === cat.id);
+  // Intermediate legacy URLs still resolve, but the two brands are directly visible.
+  const visible = cat.slug === "ac-drives" ? children.filter((c) => inverterBrandCategories.includes(c.slug))
+    : cat.slug === "motion-controller" ? children.filter((c) => c.slug !== "servos") : children;
+  if (cat.slug === "variable-frequency-drives") return categories.filter((c) => inverterBrandCategories.includes(c.slug));
+  if (cat.slug === "servos") return categories.filter((c) => servoBrandCategories.includes(c.slug));
+  return visible.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /** Ancestors from root to the category itself. */
@@ -67,13 +81,20 @@ function descendantSlugs(cat: Category): Set<string> {
   const set = new Set<string>([cat.slug]);
   const stack = [cat.id];
   while (stack.length) {
-    const id = stack.pop()!;
+    const id = stack.pop();
+    if (id === undefined) break;
     for (const c of categories) if (c.parent === id) { set.add(c.slug); stack.push(c.id); }
   }
   return set;
 }
 
 export function productsIn(cat: Category): Product[] {
+  if (driveCategorySlugs.has(cat.slug)) {
+    const allowed = inverterBrandCategories.includes(cat.slug) ? [cat.slug] : inverterBrandCategories;
+    return products.filter((p) => p.categories.some((s) => allowed.includes(s)) &&
+      ((p.brand === "OMRON" && /\b3G3/.test(p.name)) || (p.brand === "Fuji Electric" && /\bFRENIC\b/i.test(p.name))));
+  }
+  if (cat.slug === "servos") return products.filter((p) => p.categories.some((s) => servoBrandCategories.includes(s)));
   const set = descendantSlugs(cat);
   return products.filter((p) => p.categories.some((s) => set.has(s)));
 }
@@ -96,7 +117,7 @@ export function searchProducts(opts: { q?: string | undefined; brand?: string | 
   let list = products;
   if (opts.category) {
     const c = getCategory(opts.category);
-    if (c) { const set = descendantSlugs(c); list = list.filter((p) => p.categories.some((s) => set.has(s))); }
+    if (c) list = productsIn(c);
   }
   if (opts.brand) list = list.filter((p) => p.brand === opts.brand);
   if (q) {
