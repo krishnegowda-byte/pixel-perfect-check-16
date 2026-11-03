@@ -1,4 +1,5 @@
 # Current work
+- [ ] Restore authentic brand logos on Our Brands and the home strip in the supplied order; verify images and movement.
 - [x] Correct catalogue image links for external hosting and verify drive, servo, tower-lamp and menu photos.
 - [x] Fix site-opening error and verify navigation.
 - [x] Keep Fuji AC drives; show only Omron AC drives with matching names and images.
