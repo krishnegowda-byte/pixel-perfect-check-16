@@ -19,28 +19,33 @@ import photo17 from "@/assets/catalog/product-6407.jpg.asset.json";
 import photo18 from "@/assets/catalog/product-6404.jpg.asset.json";
 import photo19 from "@/assets/catalog/product-6402.jpg.asset.json";
 import photo20 from "@/assets/catalog/product-6400.jpg.asset.json";
+import { catalogAssetUrl } from "./catalog-asset-url";
 
 // Matched source product photos, hosted locally to avoid WordPress image failures.
-export const productImages: Record<string, string> = {
-  "fuji-frenic-solar-pump-controller-mini": photo0.url,
-  "fuji-frenic-lift-lm1s": photo1.url,
-  "fuji-frenic-ehvac-specialized-application-inverters-fanpump-inverter": photo2.url,
-  "fuji-franic-mega": photo3.url,
-  "fuji-franic-ace": photo4.url,
-  "fuji-frenic-mini": photo5.url,
-  "fuji-alpha5-smart": photo6.url,
-  "fuji-alpha7": photo7.url,
-  "omron-high-function-general-purpose-inverters-3g3rx-v1": photo8.url,
-  "omron-high-function-general-purpose-inverters-3g3rx2": photo9.url,
-  "omron-multi-function-compact-inverter-3g3mx2-v1": photo10.url,
-  "omron-g5-series-pulse-train-input-type-ac-servomotors-servo-drives-r88m-ker88d-kp": photo11.url,
-  "omron-ac-servomotors-and-smartstep-2-series-servo-drives-with-pulse-string-inputs-r88m-gr7d-bp": photo12.url,
-  "omron-g-series-ac-servomotors-servo-drives-with-general-purpose-pulse-string-or-analog-inputs-r88m-gr88d-gt": photo13.url,
-  "omron-g-series-ac-servomotors-servo-drives-with-built-in-mechatrolink-ii-communications-r88m-gr88d-gn-ml2": photo14.url,
-  "omron-g5-series-ac-servomotors-servo-drives-with-general-purpose-pulse-train-or-analog-inputs-r88m-kr88d-kt": photo15.url,
-  "omron-g5-series-ac-servomotors-servo-drives-with-built-in-mechatrolink-ii-communications-r88m-kr88d-kn-ml2": photo16.url,
-  "omron-g5-series-linear-motor-servo-drives-with-built-in-ethercat-communications-linear-motor-type-r88l-ecr88d-kn-ect-l": photo17.url,
-  "omron-g5-series-ac-servomotor-servo-drives-with-built-in-ethercat-communications-r88m-kr88d-kn-ect": photo18.url,
-  "omron-c-servo-system-1s-series-r88m-1-r88d-1sn-ect": photo19.url,
-  "omron-c-servo-system-1s-series-with-safety-functionality-r88m-1a-r88d-1san-ect": photo20.url,
+const productAssets = {
+  "fuji-frenic-solar-pump-controller-mini": photo0,
+  "fuji-frenic-lift-lm1s": photo1,
+  "fuji-frenic-ehvac-specialized-application-inverters-fanpump-inverter": photo2,
+  "fuji-franic-mega": photo3,
+  "fuji-franic-ace": photo4,
+  "fuji-frenic-mini": photo5,
+  "fuji-alpha5-smart": photo6,
+  "fuji-alpha7": photo7,
+  "omron-high-function-general-purpose-inverters-3g3rx-v1": photo8,
+  "omron-high-function-general-purpose-inverters-3g3rx2": photo9,
+  "omron-multi-function-compact-inverter-3g3mx2-v1": photo10,
+  "omron-g5-series-pulse-train-input-type-ac-servomotors-servo-drives-r88m-ker88d-kp": photo11,
+  "omron-ac-servomotors-and-smartstep-2-series-servo-drives-with-pulse-string-inputs-r88m-gr7d-bp": photo12,
+  "omron-g-series-ac-servomotors-servo-drives-with-general-purpose-pulse-string-or-analog-inputs-r88m-gr88d-gt": photo13,
+  "omron-g-series-ac-servomotors-servo-drives-with-built-in-mechatrolink-ii-communications-r88m-gr88d-gn-ml2": photo14,
+  "omron-g5-series-ac-servomotors-servo-drives-with-general-purpose-pulse-train-or-analog-inputs-r88m-kr88d-kt": photo15,
+  "omron-g5-series-ac-servomotors-servo-drives-with-built-in-mechatrolink-ii-communications-r88m-kr88d-kn-ml2": photo16,
+  "omron-g5-series-linear-motor-servo-drives-with-built-in-ethercat-communications-linear-motor-type-r88l-ecr88d-kn-ect-l": photo17,
+  "omron-g5-series-ac-servomotor-servo-drives-with-built-in-ethercat-communications-r88m-kr88d-kn-ect": photo18,
+  "omron-c-servo-system-1s-series-r88m-1-r88d-1sn-ect": photo19,
+  "omron-c-servo-system-1s-series-with-safety-functionality-r88m-1a-r88d-1san-ect": photo20,
 };
+
+export const productImages: Record<string, string> = Object.fromEntries(
+  Object.entries(productAssets).map(([slug, asset]) => [slug, catalogAssetUrl(asset)]),
+);

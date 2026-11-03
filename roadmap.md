@@ -1,4 +1,5 @@
 # Current work
+- [x] Correct catalogue image links for external hosting and verify drive, servo, tower-lamp and menu photos.
 - [x] Fix site-opening error and verify navigation.
 - [x] Keep Fuji AC drives; show only Omron AC drives with matching names and images.
 - [x] Place servo products under motion control, keeping Fuji and Omron products matched.
